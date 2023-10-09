@@ -15,8 +15,6 @@ namespace OutputReader
 
                 using (StreamReader read = new StreamReader(FilePath))
                 {
-                    //Console.WriteLine(read.ReadToEnd()); //Only use for shorter blocks since it reads the whole output at once, can cause issues with large files//
-
                     string line = "";
                     while((line=read.ReadLine()) !=null) 
                     {
@@ -47,17 +45,9 @@ namespace OutputReader
 
         public static void Main(string[] args)
         {
-            string path = @"C:\Users\soute\Documents\Fake_Output_Data.txt";
-     
-
-            if (File.Exists(path))
-            {
-                readFile(path);
-            }
-            else
-            {
-                Console.WriteLine("no matching file found");
-            }
+            string path = @"C:\Users\soute\Documents\Fake_Output_Data.txt";    
+            readFile(path);
+            
         }
     }
 
