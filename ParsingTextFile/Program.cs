@@ -25,11 +25,12 @@ try
     int resultsHeaderIndx = OutputFile.FindIndex(i => i.Contains(resultsHeader));
     if (resultsHeaderIndx >= 0)
     {
-        List<string> headerReportRaw = OutputFile.GetRange(0, resultsHeaderIndx - 1);
-        List<string> resultsReportRaw = OutputFile.GetRange(resultsHeaderIndx, OutputFile.Count - resultsHeaderIndx - 1);
+        List<string> headerReportRaw = OutputFile.GetRange(1, resultsHeaderIndx - 1);
+        List<string> resultsReportRaw = OutputFile.GetRange(resultsHeaderIndx+1, OutputFile.Count - resultsHeaderIndx - 1);
         resultsReportRaw[1] = Regex.Replace(resultsReportRaw[1], @"\[|\]", "");
-        Console.WriteLine(resultsReportRaw[1]);
 
+        File.WriteAllLines(@"C:\Users\soute\Documents\Fake_Header_Data.txt", headerReportRaw);
+        File.WriteAllLines(@"C:\Users\soute\Documents\Fake_Results_Data.txt", resultsReportRaw);
     }
     
 }
