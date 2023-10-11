@@ -27,6 +27,9 @@ try
     {
         List<string> headerReportRaw = OutputFile.GetRange(1, resultsHeaderIndx - 1);
         List<string> resultsReportRaw = OutputFile.GetRange(resultsHeaderIndx+1, OutputFile.Count - resultsHeaderIndx - 1);
+       headerReportRaw =  headerReportRaw.Distinct().ToList();
+
+        
         resultsReportRaw[1] = Regex.Replace(resultsReportRaw[1], @"\[|\]", "");
 
         File.WriteAllLines(@"C:\Users\soute\Documents\Fake_Header_Data.txt", headerReportRaw);
