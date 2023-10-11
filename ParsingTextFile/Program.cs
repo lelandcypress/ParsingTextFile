@@ -1,54 +1,43 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using System.Collections.Generic;
 
 namespace OutputReader
 {
     class parsefile
     {
+        static void Main(string[] args)
        
-        static void readFile( string FilePath)
         {
+            string path = @"C:\Users\soute\Documents\Fake_Output_Data.txt";
+            List<string> OutputFile = new List<string>();
+            string resultsHeader = "RESULT_DATA";
 
             try
             {
-
-                using (StreamReader read = new StreamReader(FilePath))
+                using (StreamReader read = new StreamReader(path))
                 {
                     string line = "";
                     while((line=read.ReadLine()) !=null) 
                     {
-                        Console.WriteLine(line); 
+                        OutputFile.Add(line);
 
                     }
                     read.Close();
-
-
-                   /* int charCode;
-                    while ((charCode = read.Read()) != -1)
-                    {
-                        char c = (char)charCode;
-                        //Console.Write(c);
-                    }*/
-                    read.Close();
-
                 }
 
+                int resultsHeaderIndx = OutputFile.FindIndex(i => i.Contains(resultsHeader));
+
+
             }
-
-
 
             catch (Exception ex) {
                 Console.WriteLine("OOOPS " + ex.Message);
             }
         }
 
-        public static void Main(string[] args)
-        {
-            string path = @"C:\Users\soute\Documents\Fake_Output_Data.txt";    
-            readFile(path);
-            
-        }
+        
     }
 
 }
