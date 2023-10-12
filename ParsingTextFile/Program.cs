@@ -25,12 +25,35 @@ try
     int resultsHeaderIndx = OutputFile.FindIndex(i => i.Contains(resultsHeader));
     if (resultsHeaderIndx >= 0)
     {
+        
+        //splitting the list along the "RESULTS_DATA" string//
         List<string> headerReportRaw = OutputFile.GetRange(1, resultsHeaderIndx - 1);
         List<string> resultsReportRaw = OutputFile.GetRange(resultsHeaderIndx+1, OutputFile.Count - resultsHeaderIndx - 1);
+        
+        //Data normalization
+            //header report
+        Dictionary<string,string> storeHeaderValues = new Dictionary<string,string>();
         headerReportRaw =  headerReportRaw.Distinct().ToList();
+        foreach (string header in headerReportRaw)
+        {
+            string[] parts = header.Split('=');
+            if (parts.Length == 2)
+            {
+                string key = parts[0].Trim();
+                string value = parts[1].Trim();
+                storeHeaderValues[key] = value;
+            }
+        }
+            //results data
         resultsReportRaw[0] = Regex.Replace(resultsReportRaw[0], @"\[|\]", "");
         
-        File.WriteAllLines(@"C:\Users\soute\Documents\Fake_Header_Data.txt", headerReportRaw);
+        //create header report
+        using(StreamWriter writeHeaderReport = new StreamWriter(@"C:\Users\soute\Documents\Fake_Header_Data.txt"))
+        {
+            writeHeaderReport.WriteLine(string.Join(", ", storeHeaderValues.Keys));
+            writeHeaderReport.WriteLine(string.Join(", ", storeHeaderValues.Values));
+        }
+        //create results report
         File.WriteAllLines(@"C:\Users\soute\Documents\Fake_Results_Data.txt", resultsReportRaw);
     }
     
