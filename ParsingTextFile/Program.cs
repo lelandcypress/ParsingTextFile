@@ -4,7 +4,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-string path = @"C:\Users\soute\Documents\Fake_Output_Data.txt";
+string path = @"addyourownpathhere";
 List<string> OutputFile = new List<string>();
 string resultsHeader = "RESULT_DATA";
 
@@ -48,13 +48,13 @@ try
         resultsReportRaw[0] = Regex.Replace(resultsReportRaw[0], @"\[|\]", "");
         
         //create header report
-        using(StreamWriter writeHeaderReport = new StreamWriter(@"C:\Users\soute\Documents\Fake_Header_Data.txt"))
+        using(StreamWriter writeHeaderReport = new StreamWriter(@"addyourownpathhere"))
         {
             writeHeaderReport.WriteLine(string.Join(", ", storeHeaderValues.Keys));
             writeHeaderReport.WriteLine(string.Join(", ", storeHeaderValues.Values));
         }
         //create results report
-        File.WriteAllLines(@"C:\Users\soute\Documents\Fake_Results_Data.txt", resultsReportRaw);
+        File.WriteAllLines(@"addyourownpathhere", resultsReportRaw);
     }
     
 }
